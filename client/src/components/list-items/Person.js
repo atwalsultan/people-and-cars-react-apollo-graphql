@@ -4,10 +4,12 @@ import { EditOutlined } from '@ant-design/icons'
 
 import RemovePerson from '../buttons/RemovePerson';
 import UpdatePerson from '../forms/UpdatePerson';
+import Cars from '../lists/Cars';
 
 const getStyles = () => ({
     card: {
-        width: '500px',
+        width: '100%',
+        borderColor: 'black'
     }
 })
 
@@ -35,28 +37,30 @@ const Person = (props) => {
     const handleButtonClick = () => {
         setEditMode(!editMode);
     }
-    
+
     return (
         <div>
             {
                 editMode ? (
                     <UpdatePerson
-                        id={id} 
-                        firstName={firstName} 
+                        id={id}
+                        firstName={firstName}
                         lastName={lastName}
                         onButtonClick={handleButtonClick}
                         updateStateVariable={updateStateVariable}
                     />
                 ) : (
-
                     <Card
+                        title={`${firstName} ${lastName}`}
                         style={styles.card}
+                        // bodyStyle={{border: '2px solid black'}}
+                        // headStyle={{border: '2px solid black'}}
                         actions={[
                             <EditOutlined key="edit" onClick={handleButtonClick} />,
-                            <RemovePerson id={id} firstName={firstName} lastName={lastName} 
-                        />]
+                            <RemovePerson id={id} firstName={firstName} lastName={lastName}/>
+                        ]
                     }>
-                        {firstName} {lastName}
+                        <Cars personId={id} people={props.people} />
                     </Card>
                 )
             }

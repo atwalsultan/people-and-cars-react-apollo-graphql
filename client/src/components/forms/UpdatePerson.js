@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button } from 'antd';
 import { useMutation } from '@apollo/client'
 import { UPDATE_PERSON } from '../../queries'
 
@@ -15,7 +15,7 @@ const UpdatePerson = (props) => {
     const [, forceUpdate] = useState();
 
     useEffect(() => {
-        forceUpdate()
+        forceUpdate();
     }, []);
 
     const updateStateVariable = (variable, value) => {
@@ -44,7 +44,7 @@ const UpdatePerson = (props) => {
             optimisticResponse: {
                 __typename: 'Mutation',
                 updatePerson: {
-                    __typename: 'Contact',
+                    __typename: 'Person',
                     id,
                     firstName,
                     lastName
