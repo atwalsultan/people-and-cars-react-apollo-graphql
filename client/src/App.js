@@ -1,9 +1,11 @@
+import React from 'react';
 import './App.css';
-
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { Divider } from 'antd';
 
-import AddPerson from './components/forms/AddPerson';
 import Title from './components/layout/Title';
+import AddPerson from './components/forms/AddPerson';
+import AddCar from './components/forms/AddCar';
 import People from './components/lists/People';
 
 const client = new ApolloClient({
@@ -15,8 +17,12 @@ const App = () => {
 	return (
 		<ApolloProvider client={client}>
 			<div className="App">
-				<Title />
 				<AddPerson />
+
+				<AddCar />
+
+				<Divider>People & Cars</Divider>
+
 				<People />
 			</div>
 		</ApolloProvider>

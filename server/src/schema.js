@@ -172,9 +172,9 @@ const resolvers = {
             });
 
             // Remove cars owned by the person
-            // remove(cars, c => {
-            //     return c.personId === removedPerson.id
-            // })
+            remove(cars, c => {
+                return c.personId === removedPerson.id
+            });
 
             return removedPerson;
         },
