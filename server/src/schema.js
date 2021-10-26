@@ -103,11 +103,16 @@ const typeDefs = gql`
 
     type Car {
         id: String!
-        year: String
+        year: Int
         make: String
         model: String
-        price: String
+        price: Float
         personId: String
+    }
+
+    type PersonWithCars {
+        person: Person
+        cars: [Car]
     }
 
     type Query {
@@ -115,14 +120,15 @@ const typeDefs = gql`
         people: [Person]
         car(id: String!): Car
         cars: [Car]
+        personWithCar(id: String!): PersonWithCars
     }
 
     type Mutation {
         addPerson(id: String!, firstName: String!, lastName: String!): Person
         updatePerson(id: String!, firstName: String!, lastName: String!): Person
         removePerson(id: String!): Person
-        addCar(id: String!, year: String!, make: String!, model: String!, price: String!, personId: String!): Car
-        updateCar(id: String!, year: String!, make: String!, model: String!, price: String!, personId: String!): Car
+        addCar(id: String!, year: Int!, make: String!, model: String!, price: Float!, personId: String!): Car
+        updateCar(id: String!, year: Int!, make: String!, model: String!, price: Float!, personId: String!): Car
         removeCar(id: String!): Car
     }
 `
@@ -137,6 +143,15 @@ const resolvers = {
             return find(cars, { id: args.id })
         },
         cars: () => cars,
+        personWithCar(parent, args, context, info) {
+            const matchedCars =  filter(cars, { personId: args.id });
+            const person = find(people, { id: args.id })
+            const toReturn = {
+                person: person,
+                cars: matchedCars
+            };
+            return toReturn;
+        }
     },
     Mutation: {
         addPerson: (root, args) => {
@@ -161,7 +176,6 @@ const resolvers = {
         },
         removePerson: (root, args) => {
             const removedPerson = find(people, { id: args.id });
-            // const removedCars = filter(cars, { personId: args.id });
 
             if(!removedPerson) {
                 throw new Error(`Couldn't find person with id ${args.id}`);

@@ -6,12 +6,11 @@ import RemoveCar from '../buttons/RemoveCar';
 import UpdateCar from '../forms/UpdateCar';
 
 const Car = ({ car, people }) => {
-    const [id] = useState(car.id);
-    const [year, setYear] = useState(car.year);
-    const [make, setMake] = useState(car.make);
-    const [model, setModel] = useState(car.model);
-    const [price, setPrice] = useState(car.price);
-    const [personId, setPersonId] = useState(car.personId);
+    const [, setYear] = useState(car.year);
+    const [, setMake] = useState(car.make);
+    const [, setModel] = useState(car.model);
+    const [, setPrice] = useState(car.price);
+    const [, setPersonId] = useState(car.personId);
     const [editMode, setEditMode] = useState(false);
 
     const updateStateVariable = (variable, value) => {
@@ -54,13 +53,13 @@ const Car = ({ car, people }) => {
                     <Card
                         type="inner"
                         key={car.id}
-                        style={{ width: '400px'}}
+                        style={{ width: '400px', border: '1px solid gray'}}
                         actions={[
                             <EditOutlined key="edit" onClick={handleButtonClick} />,
                             <RemoveCar id={car.id} year={car.year} make={car.make} model={car.model} price={car.price} personId={car.personId} />
                         ]}
                     >
-                        {car.year} {car.make} {car.model}: {car.price}
+                        {car.year} {car.make} {car.model}: ${car.price}
                     </Card>)
             }
         </div>

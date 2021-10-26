@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { List } from 'antd';
+
 import Person from '../list-items/Person';
 import { GET_PEOPLE } from '../../queries';
 

@@ -1,7 +1,7 @@
-import { useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client';
 import { List } from 'antd';
-import Car from '../list-items/Car';
 
+import Car from '../list-items/Car';
 import { GET_CARS } from '../../queries';
 
 const getStyles = () => ({
