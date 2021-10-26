@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select, InputNumber } from 'antd';
 import { useMutation } from '@apollo/client';
+
 import { UPDATE_CAR } from '../../queries';
 
 const UpdateCar = (props) => {
@@ -92,7 +92,7 @@ const UpdateCar = (props) => {
                 rules={[{ required: true, message: "Please input car year!" }]}
                 style={{ width: '150px' }}
             >
-                <Input onChange={e => updateStateVariable('year', e.target.value)} />
+                <InputNumber min={1900} max={2022} style={{ width: '150px' }} />
             </Form.Item>
 
             <Form.Item
@@ -116,7 +116,13 @@ const UpdateCar = (props) => {
                 rules={[{ required: true, message: "Please input car price!" }]}
                 style={{ width: '150px' }}
             >
-                <Input onChange={e => updateStateVariable('price', e.target.value)}/>
+                <InputNumber 
+                    min={0} 
+                    style={{ width: '150px' }} 
+                    step={0.01}
+                    formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    parser={value => value.replace(/\$\s?|(,*)/g, '')} 
+                />
             </Form.Item>
 
             <Form.Item

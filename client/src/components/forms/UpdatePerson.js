@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-
 import { Form, Input, Button } from 'antd';
 import { useMutation } from '@apollo/client'
+
 import { UPDATE_PERSON } from '../../queries'
 
 const UpdatePerson = (props) => {

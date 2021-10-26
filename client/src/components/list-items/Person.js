@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Card } from 'antd';
-import { EditOutlined } from '@ant-design/icons'
+import { EditOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 import RemovePerson from '../buttons/RemovePerson';
 import UpdatePerson from '../forms/UpdatePerson';
@@ -8,6 +9,7 @@ import Cars from '../lists/Cars';
 
 const getStyles = () => ({
     card: {
+        minWidth: '450px',
         width: '100%',
         borderColor: 'black'
     }
@@ -53,14 +55,13 @@ const Person = (props) => {
                     <Card
                         title={`${firstName} ${lastName}`}
                         style={styles.card}
-                        // bodyStyle={{border: '2px solid black'}}
-                        // headStyle={{border: '2px solid black'}}
                         actions={[
                             <EditOutlined key="edit" onClick={handleButtonClick} />,
                             <RemovePerson id={id} firstName={firstName} lastName={lastName}/>
                         ]
                     }>
                         <Cars personId={id} people={props.people} />
+                        <Link to={`/people/${id}`}>Learn More</Link>
                     </Card>
                 )
             }
